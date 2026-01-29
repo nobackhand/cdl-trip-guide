@@ -28,7 +28,7 @@ export default function PageContent() {
           rel="noopener noreferrer"
           className="text-cod-gray hover:text-white transition-colors"
         >
-          Need teammates for BO6? Try MicCheck
+          Need teammates for BO7? Try MicCheck
         </a>
       </div>
     </>
