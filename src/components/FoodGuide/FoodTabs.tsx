@@ -26,7 +26,7 @@ export default function FoodTabs() {
             key={loc.id}
             onClick={() => setActiveTab(loc.id)}
             whileTap={{ scale: 0.95 }}
-            className={`cursor-pointer whitespace-nowrap rounded-sm border-none px-3 py-2 font-heading text-[12px] tracking-[0.05em] ${
+            className={`cursor-pointer whitespace-nowrap rounded-sm border-none min-h-[44px] px-3 py-2 font-heading text-[12px] tracking-[0.05em] ${
               activeTab === loc.id
                 ? "bg-cod-lime text-cod-black"
                 : "bg-cod-dark2 text-cod-gray"

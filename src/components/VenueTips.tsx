@@ -5,33 +5,45 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const tips = [
   {
-    icon: "\ud83d\ude97",
+    icon: "💳",
+    title: "Cashless Venue",
+    info: "Credit cards, Apple Pay, Google Pay only. No cash accepted anywhere.",
+  },
+  {
+    icon: "🧊",
+    title: "Ice Storm Advisory",
+    info: "Dallas roads ice over fast in winter. If weather turns, use DART Rail from Mockingbird Station (1 mile walk).",
+    link: "https://www.dart.org/trip/trip-planner",
+    linkText: "DART Trip Planner →",
+  },
+  {
+    icon: "🚗",
     title: "Parking",
     info: "SMU lots around Moody Coliseum - $20/day. Arrive early on Saturday!",
     link: "https://maps.google.com/?q=SMU+Parking+Moody+Coliseum",
   },
   {
-    icon: "\ud83d\udc5c",
+    icon: "👜",
     title: "Bag Policy",
     info: "Clear bags only (12\"x12\"x6\"). Small clutches OK. No backpacks.",
   },
   {
-    icon: "\ud83d\udcf1",
+    icon: "📱",
     title: "WiFi",
     info: "Venue WiFi available but expect it to be slow. Download offline content.",
   },
   {
-    icon: "\u23f0",
+    icon: "⏰",
     title: "Doors Open",
     info: "1 hour before first match. Come early for merch and good seats.",
   },
   {
-    icon: "\ud83c\udf9f\ufe0f",
+    icon: "🎟️",
     title: "Tickets",
     info: "Mobile tickets only - have your phone charged! Screenshot your QR.",
   },
   {
-    icon: "\ud83c\udf21\ufe0f",
+    icon: "🌡️",
     title: "Inside Temp",
     info: "AC is cold - bring a hoodie even if it's warm outside.",
   },
@@ -71,7 +83,7 @@ export default function VenueTips() {
                     rel="noopener noreferrer"
                     className="mt-1 inline-block text-[10px] text-cod-lime no-underline"
                   >
-                    Open in Maps →
+                    {tip.linkText || "Open in Maps →"}
                   </a>
                 )}
               </div>

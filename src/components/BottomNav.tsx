@@ -1,34 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { useEventModeContext } from "@/components/EventModeProvider";
 
-const preparingNav = [
-  { id: "schedule", icon: "\ud83d\udcc5", label: "Schedule" },
-  { id: "hotel", icon: "\ud83c\udfe8", label: "Hotel" },
-  { id: "food", icon: "\ud83c\udf7d\ufe0f", label: "Food" },
-  { id: "uber", icon: "\ud83d\ude97", label: "Uber" },
-  { id: "info", icon: "\u2139\ufe0f", label: "Info" },
-];
-
-const gametimeNav = [
-  { id: "uber", icon: "\ud83d\ude97", label: "Uber" },
+const navItems = [
   { id: "schedule", icon: "\ud83d\udcc5", label: "Schedule" },
   { id: "food", icon: "\ud83c\udf7d\ufe0f", label: "Food" },
-  { id: "info", icon: "\u2139\ufe0f", label: "Info" },
+  { id: "uber", icon: "\ud83d\ude97", label: "Uber" },
 ];
 
 export default function BottomNav() {
-  const { mode } = useEventModeContext();
-  const navItems = mode === "preparing" ? preparingNav : gametimeNav;
   const [active, setActive] = useState(navItems[0].id);
-
-  // Reset active tab when mode changes
-  useEffect(() => {
-    const items = mode === "preparing" ? preparingNav : gametimeNav;
-    setActive(items[0].id);
-  }, [mode]);
 
   function scrollTo(sectionId: string) {
     setActive(sectionId);
@@ -47,7 +29,7 @@ export default function BottomNav() {
           onClick={() => scrollTo(item.id)}
           whileTap={{ scale: 0.85 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          className={`cursor-pointer border-none bg-none px-2.5 py-1 text-center font-heading text-[10px] tracking-[0.05em] transition-all duration-200 ${
+          className={`cursor-pointer border-none bg-none min-h-[44px] px-3 py-2 text-center font-heading text-[11px] tracking-[0.05em] transition-all duration-200 ${
             active === item.id ? "text-cod-lime" : "text-cod-gray"
           }`}
         >

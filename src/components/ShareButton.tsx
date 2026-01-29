@@ -79,7 +79,7 @@ export default function ShareButton() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="fixed left-4 right-4 top-1/2 z-[101] mx-auto max-w-sm -translate-y-1/2 rounded-sm border border-cod-lime/30 bg-cod-dark2 p-5"
+              className="fixed left-4 right-4 top-1/2 z-[101] mx-auto max-w-[calc(100vw-2rem)] -translate-y-1/2 rounded-sm border border-cod-lime/30 bg-cod-dark2 p-5"
             >
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-[16px] font-bold text-white">Share This Guide</h3>

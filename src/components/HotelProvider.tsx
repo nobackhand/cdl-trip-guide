@@ -11,6 +11,10 @@ export interface Hotel {
   // Coordinates for future use
   lat: number;
   lng: number;
+  // Recommendation data (for unified hotel display)
+  badge?: string;        // "Best Value", "Closest", etc.
+  price?: string;        // "$236 (2 nights)"
+  perks?: string[];      // ["FREE parking", "Walk to Knox bars"]
 }
 
 // Custom coordinates for "Other" location (GPS-based or geocoded)
@@ -29,6 +33,9 @@ export const HOTEL_OPTIONS: Hotel[] = [
     distanceToVenue: 1.5,
     lat: 32.8177,
     lng: -96.7873,
+    badge: "Best Value",
+    price: "$236 (2 nights)",
+    perks: ["FREE parking & breakfast", "Walk to Knox-Henderson (0.5 mi)", "$10 Uber to venue"],
   },
   {
     id: "hilton-park-cities",
@@ -37,6 +44,8 @@ export const HOTEL_OPTIONS: Hotel[] = [
     distanceToVenue: 0.8,
     lat: 32.8447,
     lng: -96.7907,
+    badge: "Closest",
+    perks: ["Walking distance to venue", "Near SMU campus"],
   },
   {
     id: "marriott-uptown",
@@ -45,6 +54,7 @@ export const HOTEL_OPTIONS: Hotel[] = [
     distanceToVenue: 2.8,
     lat: 32.8098,
     lng: -96.8055,
+    perks: ["Uptown nightlife nearby", "$12 Uber to venue"],
   },
   {
     id: "hotel-zaza",
@@ -53,6 +63,8 @@ export const HOTEL_OPTIONS: Hotel[] = [
     distanceToVenue: 3.2,
     lat: 32.7993,
     lng: -96.8009,
+    badge: "Luxury",
+    perks: ["Rooftop pool & bar", "Premium experience"],
   },
   {
     id: "warwick-melrose",
@@ -61,6 +73,7 @@ export const HOTEL_OPTIONS: Hotel[] = [
     distanceToVenue: 2.5,
     lat: 32.8127,
     lng: -96.8062,
+    perks: ["Historic boutique hotel", "Oak Lawn dining"],
   },
   {
     id: "other",

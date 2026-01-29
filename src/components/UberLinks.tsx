@@ -191,6 +191,36 @@ export default function UberLinks() {
           </button>
         )}
       </div>
+
+      {/* DART Rail Backup */}
+      <div className="mt-4 rounded-sm border border-blue-500/30 bg-blue-900/10 p-3">
+        <div className="flex items-center gap-2">
+          <span className="text-[16px]">🚇</span>
+          <div className="text-[12px] font-semibold text-blue-400">DART Rail Backup</div>
+        </div>
+        <div className="mt-2 text-[11px] text-cod-gray">
+          If Uber surges or roads ice over, take DART Rail to <strong className="text-white">Mockingbird Station</strong> (Red/Orange/Blue lines).
+          It's a ~1 mile walk to the venue, or catch the Mustang Express shuttle.
+        </div>
+        <div className="mt-2 flex gap-2">
+          <a
+            href="https://www.dart.org/trip/trip-planner"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded-sm bg-blue-600/20 px-2 py-1 text-[10px] text-blue-400 no-underline transition-colors hover:bg-blue-600/30"
+          >
+            DART Trip Planner →
+          </a>
+          <a
+            href="https://maps.google.com/?q=Mockingbird+Station+Dallas"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded-sm bg-blue-600/20 px-2 py-1 text-[10px] text-blue-400 no-underline transition-colors hover:bg-blue-600/30"
+          >
+            Station on Map →
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

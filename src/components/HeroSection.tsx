@@ -2,10 +2,9 @@
 
 import { motion } from "framer-motion";
 import { useCountdown } from "@/hooks/useCountdown";
-import { useEventModeContext } from "@/components/EventModeProvider";
+import WeatherBadge from "@/components/WeatherBadge";
 
 export default function HeroSection() {
-  const { mode, isOverridden, toggleMode } = useEventModeContext();
   const { days, hours, mins, secs, isLive, isOver } = useCountdown();
 
   return (
@@ -31,6 +30,27 @@ export default function HeroSection() {
             </div>
             <div className="mt-0.5 text-[10px] tracking-[0.1em] text-cod-gray">
               JAN 29 - FEB 1 • MOODY COLISEUM, DALLAS
+            </div>
+            <div className="mt-1">
+              <WeatherBadge />
+            </div>
+            <div className="mt-2 flex gap-2">
+              <a
+                href="https://www.tixr.com/groups/optictexas/events/optic-texas-major-i-presented-by-monster-energy-166248"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-sm bg-cod-lime/20 px-2 py-1 text-[9px] font-semibold text-cod-lime no-underline transition-colors hover:bg-cod-lime/30"
+              >
+                🎟️ Tickets
+              </a>
+              <a
+                href="https://opticgaming.com/event/major-1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-sm bg-cod-green/20 px-2 py-1 text-[9px] font-semibold text-cod-lime no-underline transition-colors hover:bg-cod-green/30"
+              >
+                📋 Event Info
+              </a>
             </div>
           </div>
 
@@ -63,39 +83,6 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Mode Toggle */}
-        <div className="mt-3 flex items-center justify-center gap-2">
-          <div className="relative flex rounded-sm bg-cod-black/60 p-0.5 backdrop-blur-sm">
-            <motion.div
-              className={`absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-sm shadow-lg ${
-                mode === "preparing"
-                  ? "bg-gradient-to-r from-cod-green to-cod-green-dark"
-                  : "bg-gradient-to-r from-cod-lime to-cod-green"
-              }`}
-              animate={{ x: mode === "preparing" ? 2 : "calc(100% + 2px)" }}
-              transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            />
-            <button
-              onClick={mode !== "preparing" ? toggleMode : undefined}
-              className={`relative z-10 cursor-pointer rounded-sm border-none px-4 py-1.5 font-heading text-[11px] tracking-[0.05em] transition-colors ${
-                mode === "preparing" ? "text-white" : "text-cod-gray hover:text-white"
-              }`}
-            >
-              PREPARING
-            </button>
-            <button
-              onClick={mode !== "gametime" ? toggleMode : undefined}
-              className={`relative z-10 cursor-pointer rounded-sm border-none px-4 py-1.5 font-heading text-[11px] tracking-[0.05em] transition-colors ${
-                mode === "gametime" ? "text-cod-black" : "text-cod-gray hover:text-white"
-              }`}
-            >
-              GAME TIME
-            </button>
-          </div>
-          {isOverridden && (
-            <span className="text-[9px] text-cod-gray">(manual)</span>
-          )}
-        </div>
       </div>
 
       {/* Bottom glow line */}
