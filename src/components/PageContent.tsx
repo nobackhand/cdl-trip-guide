@@ -19,6 +19,18 @@ export default function PageContent() {
       {/* Hotel & transport — unified hotel section */}
       <HotelSelector />
       <UberLinks />
+
+      {/* Footer */}
+      <div className="my-8 text-center text-[11px] text-cod-gray">
+        <a
+          href="https://miccheck.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cod-gray hover:text-white transition-colors"
+        >
+          Need teammates for BO6? Try MicCheck
+        </a>
+      </div>
     </>
   );
 }
