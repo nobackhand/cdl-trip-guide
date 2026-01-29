@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Roboto } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import Providers from "@/components/Providers";
 import "./globals.css";
 
@@ -76,6 +77,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${bebasNeue.variable} ${roboto.variable} antialiased`}>
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
