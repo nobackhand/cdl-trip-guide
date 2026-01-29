@@ -7,7 +7,8 @@ export default function WeatherBadge() {
   const { data, isLoading } = useQuery({
     queryKey: ["weather"],
     queryFn: fetchWeather,
-    staleTime: 30 * 60 * 1000,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000,   // 10 minutes garbage collection
     retry: 1,
   });
 

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:opticmajor1.vercel.app)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

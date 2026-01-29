@@ -15,12 +15,19 @@ const DEMO_DATA = {
   source: "demo" as const,
 };
 
+// Cache control headers to prevent stale data on mobile
+const CACHE_HEADERS = {
+  "Cache-Control": "no-cache, no-store, must-revalidate",
+  "Pragma": "no-cache",
+  "Expires": "0",
+};
+
 export async function GET() {
   const API_KEY = process.env.OPENWEATHER_API_KEY;
 
   // Return demo data if no API key (works without configuration)
   if (!API_KEY) {
-    return NextResponse.json(DEMO_DATA);
+    return NextResponse.json(DEMO_DATA, { headers: CACHE_HEADERS });
   }
 
   try {
@@ -63,7 +70,7 @@ export async function GET() {
         : 0,
       hourly,
       source: "live",
-    });
+    }, { headers: CACHE_HEADERS });
   } catch (error) {
     console.error("Weather API error:", error instanceof Error ? error.message : error);
     // Fallback static data
@@ -77,6 +84,6 @@ export async function GET() {
       rainChance: 17,
       hourly: [],
       source: "fallback",
-    });
+    }, { headers: CACHE_HEADERS });
   }
 }
