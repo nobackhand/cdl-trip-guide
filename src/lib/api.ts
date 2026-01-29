@@ -21,7 +21,9 @@ export interface UberEstimate {
 }
 
 export async function fetchWeather(): Promise<WeatherData> {
-  const res = await fetch("/api/weather");
+  const res = await fetch(`/api/weather?_t=${Date.now()}`, {
+    cache: "no-store",
+  });
   if (!res.ok) throw new Error("Weather fetch failed");
   return res.json();
 }
