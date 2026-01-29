@@ -11,6 +11,7 @@ import HotelSelector from "@/components/HotelSelector";
 import ScheduleTabs from "@/components/Schedule/ScheduleTabs";
 import FoodTabs from "@/components/FoodGuide/FoodTabs";
 import VenueTips from "@/components/VenueTips";
+import ShareButton from "@/components/ShareButton";
 
 export default function PageContent() {
   const { mode } = useEventModeContext();
@@ -82,6 +83,19 @@ export default function PageContent() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Share CTA */}
+      <div className="my-6 rounded-sm border border-cod-lime/20 bg-cod-dark2 p-4 text-center">
+        <div className="mb-2 text-[13px] font-semibold text-white">
+          Going with friends? Share this guide!
+        </div>
+        <div className="mb-3 text-[11px] text-cod-gray">
+          So everyone has hotel info, Uber prices & the schedule
+        </div>
+        <div className="flex justify-center">
+          <ShareButton />
+        </div>
+      </div>
     </>
   );
 }

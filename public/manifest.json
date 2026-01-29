@@ -1,0 +1,27 @@
+{
+  "name": "CDL Major I - Dallas Trip Guide",
+  "short_name": "CDL Dallas",
+  "description": "Your pocket guide to CDL Major I in Dallas - Hotels, Uber, Food & Schedule",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#4a7c2b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["sports", "travel", "entertainment"],
+  "screenshots": [
+    {
+      "src": "/cdl_major_dashboard.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "label": "CDL Major I Trip Guide Dashboard"
+    }
+  ]
+}
