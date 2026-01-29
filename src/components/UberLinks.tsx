@@ -1,114 +1,195 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
 import { useToast } from "@/components/Toast";
-import { HOTEL_ADDRESS } from "@/lib/constants";
-import { fetchUberEstimates } from "@/lib/api";
-import { UberCardSkeleton } from "@/components/ui/Skeleton";
-import { useGeolocation } from "@/hooks/useGeolocation";
+import { useHotel } from "@/components/HotelProvider";
+import { useUberEstimates } from "@/hooks/useUberEstimates";
+import { UberEstimate } from "@/lib/uber-pricing";
 
 export default function UberLinks() {
   const { showToast } = useToast();
-  const { location, loading: geoLoading } = useGeolocation();
-  const { data: estimates, isLoading } = useQuery({
-    queryKey: ["uber", location?.lat ?? null, location?.lng ?? null],
-    queryFn: () => fetchUberEstimates(location ?? undefined),
-    enabled: !geoLoading,
-    staleTime: 5 * 60 * 1000,
-    retry: 1,
-  });
+  const { selectedHotel, customCoords, hasSelectedHotel } = useHotel();
+  const { estimates, hotelEstimate, locationSource, locationLoading, locationDenied, surge } = useUberEstimates();
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  function copyAddress() {
-    navigator.clipboard.writeText(HOTEL_ADDRESS).then(() => {
-      showToast("Address copied! \ud83d\udccb");
-    });
+  // Safe clipboard write with error handling
+  const copyToClipboard = useCallback(async (text: string): Promise<boolean> => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      // Clipboard API failed (common on mobile or non-HTTPS)
+      return false;
+    }
+  }, []);
+
+  // Combine standard estimates with hotel estimate if available
+  const allEstimates: UberEstimate[] = hotelEstimate
+    ? [...estimates, hotelEstimate]
+    : estimates;
+
+  async function handleTap(est: UberEstimate) {
+    if (copiedId === est.key) {
+      // Second tap - open Uber
+      window.open(est.deepLink, "_blank");
+      setCopiedId(null);
+    } else {
+      // First tap - copy address
+      const copied = await copyToClipboard(est.address);
+      if (copied) {
+        showToast(`${est.address} copied! Tap again for Uber`, { duration: 4000 });
+        setCopiedId(est.key);
+        // Reset after 4 seconds
+        setTimeout(() => setCopiedId(null), 4000);
+      } else {
+        // Clipboard failed - still allow opening Uber
+        showToast("Couldn't copy address. Tap again to open Uber directly.", { type: "warning", duration: 4000 });
+        setCopiedId(est.key);
+        setTimeout(() => setCopiedId(null), 4000);
+      }
+    }
+  }
+
+  function getLocationIndicator() {
+    if (locationLoading) {
+      return (
+        <span className="ml-2 inline-flex items-center gap-1 text-cod-gray">
+          <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-cod-lime" />
+          Getting your location...
+        </span>
+      );
+    }
+    if (locationSource === "gps") {
+      return <span className="ml-2 text-cod-lime">• Prices from your location</span>;
+    }
+    if (locationSource === "custom" && customCoords) {
+      return <span className="ml-2 text-cod-lime">• Prices from your saved location</span>;
+    }
+    if (locationSource === "hotel" && selectedHotel) {
+      return <span className="ml-2 text-cod-lime">• Estimates from {selectedHotel.name}</span>;
+    }
+    // Default location or no location - show warning
+    return null;
+  }
+
+  // Separate warning for GPS denied or default estimates
+  function getLocationWarning() {
+    if (locationLoading) return null;
+
+    if (locationDenied) {
+      return (
+        <div className="mb-3 flex items-start gap-2 rounded-sm bg-amber-900/30 border border-amber-600/50 px-3 py-2">
+          <span className="text-[14px]">📍</span>
+          <div>
+            <div className="text-[11px] font-medium text-amber-400">Location unavailable</div>
+            <div className="text-[10px] text-amber-300/80">
+              Showing default estimates. Enable location in your browser for accurate prices.
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (locationSource === "default") {
+      return (
+        <div className="mb-3 flex items-start gap-2 rounded-sm bg-cod-dark2 border border-cod-gray/30 px-3 py-2">
+          <span className="text-[14px]">ℹ️</span>
+          <div className="text-[10px] text-cod-gray">
+            Estimates based on Uptown area. Select your hotel above for personalized prices.
+          </div>
+        </div>
+      );
+    }
+
+    return null;
   }
 
   return (
     <section id="uber" className="my-5">
-      <h2 className="mb-1 font-heading text-[16px] font-bold uppercase tracking-[6px] text-cod-orange">
-        {"\ud83d\ude97"} Quick Uber
+      <h2 className="cdl-section-header">
+        🚗 Quick Rides
       </h2>
       <div className="section-divider" />
 
-      {/* Surge indicator */}
-      {estimates && estimates[0]?.surgeMultiplier > 1 && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          className="mb-2 rounded-lg animated-gradient-orange px-3 py-1.5 text-center text-[11px] font-semibold text-white"
-        >
-          {"\u26a1"} {estimates[0].surgeMultiplier}x surge pricing active
-        </motion.div>
-      )}
+      {/* Location warning (GPS denied or default) */}
+      {getLocationWarning()}
+
+      <p className="mb-3 text-[10px] text-cod-gray">
+        Tap to copy address • Tap again to open Uber
+        {getLocationIndicator()}
+        {surge > 1 && (
+          <span className="ml-2 text-amber-400">• {surge}x surge pricing</span>
+        )}
+      </p>
 
       <div className="grid grid-cols-2 gap-2">
-        {isLoading ? (
-          <>
-            <UberCardSkeleton />
-            <UberCardSkeleton />
-            <UberCardSkeleton />
-          </>
-        ) : estimates ? (
-          estimates.map((est) => (
-            <motion.a
-              key={est.destination}
-              href={est.deepLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -2, boxShadow: "0 8px 20px rgba(0,0,0,0.3)" }}
-              whileTap={{ scale: 0.96 }}
-              className="rounded-lg glass-card p-3 text-center text-white no-underline active:bg-cod-green/20"
-            >
-              <div className="text-[11px] font-semibold">{est.destination}</div>
-              <div className="text-[18px] font-bold text-cod-lime text-glow">
-                ${est.lowEstimate}-${est.highEstimate}
-              </div>
-              <div className="text-[9px] text-cod-gray">
-                {est.distance} &bull; {est.duration}
-              </div>
-              {est.surgeMultiplier > 1 && (
-                <div className="mt-1 text-[9px] text-cod-orange">
-                  {"\u26a1"} {est.surgeMultiplier}x
-                </div>
+        {allEstimates.map((est) => (
+          <motion.button
+            key={est.key}
+            onClick={() => handleTap(est)}
+            whileHover={{ y: -2, boxShadow: "0 8px 20px rgba(0,0,0,0.3)" }}
+            whileTap={{ scale: 0.96 }}
+            className={`cursor-pointer rounded-sm glass-card p-3 text-left transition-all ${
+              copiedId === est.key
+                ? "border-cod-lime bg-cod-lime/10"
+                : ""
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-[16px]">{est.icon}</span>
+              {copiedId === est.key && (
+                <span className="rounded-sm bg-cod-lime px-1.5 py-0.5 text-[8px] font-bold text-cod-black">
+                  TAP FOR UBER
+                </span>
               )}
-            </motion.a>
-          ))
-        ) : (
-          // Fallback static cards
-          <>
-            {[
-              { icon: "\ud83c\udfdf\ufe0f", dest: "Venue", cost: "~$10", time: "1.7 mi \u2022 6 min", url: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Moody%20Coliseum%2C%20Dallas%2C%20TX" },
-              { icon: "\ud83c\udfb8", dest: "Deep Ellum", cost: "~$15", time: "4 mi \u2022 12 min", url: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Deep%20Ellum%2C%20Dallas%2C%20TX" },
-              { icon: "\ud83c\udf56", dest: "Pecan Lodge", cost: "~$12", time: "3.5 mi \u2022 10 min", url: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Pecan%20Lodge%2C%20Dallas%2C%20TX" },
-            ].map((d) => (
-              <motion.a
-                key={d.dest}
-                href={d.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -2, boxShadow: "0 8px 20px rgba(0,0,0,0.3)" }}
-                whileTap={{ scale: 0.96 }}
-                className="rounded-lg glass-card p-3 text-center text-white no-underline active:bg-cod-green/20"
-              >
-                <div className="text-[11px] font-semibold">{d.icon} {d.dest}</div>
-                <div className="text-[18px] font-bold text-cod-lime text-glow">{d.cost}</div>
-                <div className="text-[9px] text-cod-gray">{d.time}</div>
-              </motion.a>
-            ))}
-          </>
-        )}
+            </div>
+            <div className="mt-1 text-[12px] font-semibold text-white">{est.name}</div>
+            <div className="text-[18px] font-bold text-cod-lime text-glow">
+              ${est.fareRange.low}-${est.fareRange.high}
+            </div>
+            <div className="text-[9px] text-cod-gray">
+              {est.miles} mi • {est.duration} min
+            </div>
+            {copiedId === est.key ? (
+              <div className="mt-1 text-[9px] text-cod-lime">✓ Address copied!</div>
+            ) : (
+              <div className="mt-1 truncate text-[9px] text-cod-gray/70">{est.address}</div>
+            )}
+          </motion.button>
+        ))}
+      </div>
 
-        <motion.button
-          onClick={copyAddress}
-          whileTap={{ scale: 0.96 }}
-          className="cursor-pointer rounded-lg glass-card p-3 text-center text-white active:bg-cod-green/20"
+      {/* Direct copy buttons */}
+      <div className="mt-3 flex gap-2">
+        <button
+          onClick={async () => {
+            const copied = await copyToClipboard("Moody Coliseum, 3100 Dyer St, Dallas, TX 75205");
+            if (copied) {
+              showToast("Venue address copied!");
+            } else {
+              showToast("Couldn't copy address", { type: "error" });
+            }
+          }}
+          className="flex-1 cursor-pointer rounded-sm border border-cod-lime/30 bg-cod-dark2 px-3 py-2 text-[11px] text-cod-gray transition-colors hover:text-white"
         >
-          <div className="text-[11px] font-semibold">{"\ud83d\udccb"} Hotel Address</div>
-          <div className="text-[12px] font-bold text-cod-lime">Copy</div>
-          <div className="text-[9px] text-cod-gray">Tap to copy</div>
-        </motion.button>
+          📍 Copy Venue Address
+        </button>
+        {hasSelectedHotel && selectedHotel?.id !== "other" && selectedHotel?.address && (
+          <button
+            onClick={async () => {
+              const copied = await copyToClipboard(selectedHotel.address);
+              if (copied) {
+                showToast("Your hotel address copied!");
+              } else {
+                showToast("Couldn't copy address", { type: "error" });
+              }
+            }}
+            className="flex-1 cursor-pointer rounded-sm border border-cod-lime/30 bg-cod-dark2 px-3 py-2 text-[11px] text-cod-gray transition-colors hover:text-white"
+          >
+            🏨 Copy My Hotel
+          </button>
+        )}
       </div>
     </section>
   );

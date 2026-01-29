@@ -16,7 +16,7 @@ export default function NearbyBanner() {
       initial={{ opacity: 0, height: 0 }}
       animate={{ opacity: 1, height: "auto" }}
       transition={{ duration: 0.3 }}
-      className="mb-4 rounded-xl border border-cod-green/30 bg-cod-green/5 backdrop-blur-md p-3"
+      className="mb-4 rounded-sm border border-cod-green/30 bg-cod-green/5 p-3"
     >
       <div className="text-[12px] font-semibold text-cod-lime">
         {"\ud83d\udccd"} Near you right now
@@ -29,7 +29,7 @@ export default function NearbyBanner() {
         href={closest.mapsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-1 inline-block text-[11px] text-cod-cyan no-underline"
+        className="mt-1 inline-block text-[11px] text-cod-lime no-underline"
       >
         Get directions &rarr;
       </a>

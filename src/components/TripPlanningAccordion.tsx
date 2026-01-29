@@ -13,7 +13,7 @@ export default function TripPlanningAccordion() {
     <section className="my-5">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-full cursor-pointer items-center gap-3 rounded-xl glass-card px-4 py-3 text-left card-lift active:bg-white/10"
+        className="flex w-full cursor-pointer items-center gap-3 rounded-sm glass-card px-4 py-3 text-left card-lift active:bg-white/10"
       >
         <span className="text-[20px]">{"\ud83e\uddf3"}</span>
         <div className="flex-1">

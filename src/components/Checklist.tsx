@@ -23,11 +23,11 @@ export default function Checklist() {
 
   return (
     <section id="checklist" className="my-5">
-      <h2 className="mb-1 font-heading text-[16px] font-bold uppercase tracking-[6px] text-cod-orange">
+      <h2 className="cdl-section-header">
         {"\u2705"} Trip Checklist
       </h2>
       <div className="section-divider" />
-      <div className="rounded-xl border-l-4 border-cod-green glass-card p-4">
+      <div className="rounded-sm border-l-4 border-cod-green glass-card p-4">
         {items.map((item) => (
           <div
             key={item.id}
@@ -35,7 +35,7 @@ export default function Checklist() {
           >
             <button
               onClick={() => toggle(item.id)}
-              className={`flex h-[22px] w-[22px] shrink-0 cursor-pointer items-center justify-center rounded border-2 border-cod-green text-[14px] font-bold text-white ${
+              className={`flex h-[22px] w-[22px] shrink-0 cursor-pointer items-center justify-center rounded-sm border-2 border-cod-green text-[14px] font-bold text-white ${
                 checked[item.id] ? "bg-cod-green" : "bg-transparent"
               }`}
             >

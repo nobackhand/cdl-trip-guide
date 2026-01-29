@@ -7,9 +7,9 @@ export default function BracketView() {
 
   return (
     <>
-      <div className="rounded-xl border-l-4 border-cod-green glass-card p-4">
+      <div className="rounded-sm border-l-4 border-cod-green glass-card p-4">
         <div className="mb-3 text-center">
-          <div className="text-[13px] font-bold text-cod-orange">DOUBLE ELIMINATION</div>
+          <div className="text-[13px] font-bold text-cod-lime">DOUBLE ELIMINATION</div>
           <div className="text-[10px] text-cod-gray">12 Teams &bull; $365K Prize Pool</div>
         </div>
 
@@ -42,7 +42,7 @@ export default function BracketView() {
         </div>
 
         {/* Grand Finals */}
-        <div className="rounded-lg bg-white/10 p-3 text-center">
+        <div className="rounded-sm bg-white/10 p-3 text-center">
           <div className="font-bold text-cod-yellow">{"\ud83c\udfc6"} GRAND FINALS</div>
           <div className="text-[11px]">Sunday 5 PM &bull; Best of 7</div>
           <div className="text-[20px] font-bold text-cod-lime text-glow">$150,000</div>
@@ -53,7 +53,7 @@ export default function BracketView() {
         href={LINKS.liquipedia}
         target="_blank"
         rel="noopener noreferrer"
-        className="my-1.5 flex items-center gap-2.5 rounded-lg glass-card px-3 py-2.5 text-white no-underline card-lift active:border-cod-green/50 active:bg-cod-green/20"
+        className="my-1.5 flex items-center gap-2.5 rounded-sm glass-card px-3 py-2.5 text-white no-underline card-lift active:border-cod-green/50 active:bg-cod-green/20"
       >
         <span className="w-7 text-center text-[18px]">{"\ud83d\udcca"}</span>
         <div className="flex-1">

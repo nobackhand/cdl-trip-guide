@@ -7,11 +7,11 @@ export default function CostSplitter() {
 
   return (
     <section id="splitter" className="my-5">
-      <h2 className="mb-1 font-heading text-[16px] font-bold uppercase tracking-[6px] text-cod-orange">
+      <h2 className="cdl-section-header">
         {"\ud83d\udcb0"} Trip Cost Splitter
       </h2>
       <div className="section-divider" />
-      <div className="rounded-xl glass-card p-4">
+      <div className="rounded-sm glass-card p-4">
         <div className="mb-4 text-center">
           <div className="text-[11px] text-cod-gray">TOTAL TRIP COST (Est.)</div>
           <div className="text-[42px] font-bold text-cod-lime text-glow text-shadow-subtle">$276</div>
@@ -29,7 +29,7 @@ export default function CostSplitter() {
             </span>
           </div>
         ))}
-        <div className="mt-3 rounded-lg bg-cod-green/80 backdrop-blur-sm p-3 text-center">
+        <div className="mt-3 rounded-sm bg-cod-green/80 p-3 text-center">
           <div className="text-[11px] opacity-90">PER PERSON (2 people)</div>
           <div className="text-[24px] font-bold">$138</div>
         </div>

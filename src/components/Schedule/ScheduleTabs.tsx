@@ -18,7 +18,7 @@ export default function ScheduleTabs() {
 
   return (
     <section id="schedule" className="my-5">
-      <h2 className="mb-1 font-heading text-[16px] font-bold uppercase tracking-[6px] text-cod-orange">
+      <h2 className="cdl-section-header">
         {"\ud83d\udcc5"} Match Schedule
       </h2>
       <div className="section-divider" />
@@ -29,11 +29,11 @@ export default function ScheduleTabs() {
         target="_blank"
         rel="noopener noreferrer"
         whileTap={{ scale: 0.98 }}
-        className="my-4 flex items-center gap-3 rounded-xl bg-gradient-to-br from-[#ff0000] to-[#cc0000] p-3 text-white no-underline"
+        className="my-4 flex items-center gap-3 rounded-sm border border-cod-lime/30 bg-cod-dark2 p-3 text-white no-underline"
       >
         <span className="text-[28px]">{"\u25b6\ufe0f"}</span>
         <div>
-          <div className="text-[14px] font-bold">Watch CDL Major I Live</div>
+          <div className="font-heading text-[16px] tracking-[0.05em]">Watch CDL Major I Live</div>
           <div className="text-[11px] opacity-80">YouTube or Twitch.tv/CDL</div>
         </div>
       </motion.a>
@@ -45,9 +45,9 @@ export default function ScheduleTabs() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             whileTap={{ scale: 0.95 }}
-            className={`cursor-pointer whitespace-nowrap rounded-lg border-none px-3 py-2 font-body text-[11px] font-semibold ${
+            className={`cursor-pointer whitespace-nowrap rounded-sm border-none px-3 py-2 font-heading text-[12px] tracking-[0.05em] ${
               activeTab === tab.id
-                ? "bg-cod-green text-white"
+                ? "bg-cod-lime text-cod-black"
                 : "bg-cod-dark2 text-cod-gray"
             }`}
           >
@@ -75,12 +75,6 @@ export default function ScheduleTabs() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Hosted by */}
-      <div className="mt-2 rounded-xl border-l-4 border-cod-lime glass-card p-4 text-center">
-        <div className="text-[11px] text-cod-gray">Hosted by</div>
-        <div className="text-[18px] font-bold text-cod-lime">OPTIC TEXAS</div>
-        <div className="text-[10px] text-cod-gray">Defending Champions</div>
-      </div>
     </section>
   );
 }

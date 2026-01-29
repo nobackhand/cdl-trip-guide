@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Rajdhani, Roboto } from "next/font/google";
+import { Bebas_Neue, Roboto } from "next/font/google";
 import Providers from "@/components/Providers";
 import "./globals.css";
 
-const rajdhani = Rajdhani({
+const bebasNeue = Bebas_Neue({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400"],
 });
 
 const roboto = Roboto({
@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rajdhani.variable} ${roboto.variable} antialiased`}>
+      <body className={`${bebasNeue.variable} ${roboto.variable} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

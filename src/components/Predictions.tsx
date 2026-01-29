@@ -18,7 +18,7 @@ export default function Predictions() {
 
   return (
     <section id="predictions" className="my-5">
-      <h2 className="mb-1 font-heading text-[16px] font-bold uppercase tracking-[6px] text-cod-orange">
+      <h2 className="cdl-section-header">
         {"\ud83c\udfaf"} Your Predictions
       </h2>
       <div className="section-divider" />
@@ -27,14 +27,14 @@ export default function Predictions() {
       </p>
 
       {/* QF Matches */}
-      <div className="mb-2.5 rounded-xl glass-card p-3">
-        <div className="mb-2.5 text-[11px] font-semibold text-cod-cyan">
+      <div className="mb-2.5 rounded-sm glass-card p-3">
+        <div className="mb-2.5 text-[11px] font-semibold text-cod-lime">
           UPPER BRACKET QFs (Thursday)
         </div>
         {predictionMatches.map((match) => (
           <div
             key={match.id}
-            className={`mb-2 rounded-xl bg-white/5 p-2.5 last:mb-0 ${
+            className={`mb-2 rounded-sm bg-white/5 p-2.5 last:mb-0 ${
               match.isHomeTeam ? "border border-cod-lime" : ""
             }`}
           >
@@ -46,7 +46,7 @@ export default function Predictions() {
             <div className="flex items-center justify-between">
               <button
                 onClick={() => select(match.id, match.team1Id)}
-                className={`flex-1 cursor-pointer rounded-lg border-2 bg-transparent px-1 py-2.5 text-center text-white transition-all duration-200 active:bg-cod-dark2 ${
+                className={`flex-1 cursor-pointer rounded-sm border-2 bg-transparent px-1 py-2.5 text-center text-white transition-all duration-200 active:bg-cod-dark2 ${
                   predictions[match.id] === match.team1Id
                     ? "border-cod-lime bg-[rgba(139,195,74,0.15)]"
                     : "border-transparent"
@@ -57,7 +57,7 @@ export default function Predictions() {
               <div className="text-[12px] font-bold text-cod-gray">vs</div>
               <button
                 onClick={() => select(match.id, match.team2Id)}
-                className={`flex-1 cursor-pointer rounded-lg border-2 bg-transparent px-1 py-2.5 text-center text-white transition-all duration-200 active:bg-cod-dark2 ${
+                className={`flex-1 cursor-pointer rounded-sm border-2 bg-transparent px-1 py-2.5 text-center text-white transition-all duration-200 active:bg-cod-dark2 ${
                   predictions[match.id] === match.team2Id
                     ? "border-cod-lime bg-[rgba(139,195,74,0.15)]"
                     : "border-transparent"
@@ -77,7 +77,7 @@ export default function Predictions() {
       </div>
 
       {/* Tournament Winner */}
-      <div className="rounded-xl glass-card p-3">
+      <div className="rounded-sm glass-card p-3">
         <div className="mb-2.5 text-[11px] font-semibold text-cod-yellow">
           {"\ud83c\udfc6"} TOURNAMENT WINNER
         </div>
@@ -86,7 +86,7 @@ export default function Predictions() {
             <button
               key={opt.id}
               onClick={() => select("winner", opt.id)}
-              className={`cursor-pointer rounded-lg border-2 bg-transparent px-1 py-2.5 text-center text-white transition-all duration-200 active:bg-cod-dark2 ${
+              className={`cursor-pointer rounded-sm border-2 bg-transparent px-1 py-2.5 text-center text-white transition-all duration-200 active:bg-cod-dark2 ${
                 predictions.winner === opt.id
                   ? "border-cod-lime bg-[rgba(139,195,74,0.15)]"
                   : "border-transparent"

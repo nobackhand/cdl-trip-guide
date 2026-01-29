@@ -3,7 +3,7 @@ import WeatherCard from "@/components/WeatherCard";
 export default function QuickInfo() {
   return (
     <section id="info" className="my-5">
-      <h2 className="mb-1 font-heading text-[16px] font-bold uppercase tracking-[6px] text-cod-orange">
+      <h2 className="cdl-section-header">
         {"\u2139\ufe0f"} Quick Info
       </h2>
       <div className="section-divider" />
@@ -12,7 +12,7 @@ export default function QuickInfo() {
         <WeatherCard />
 
         {/* Emergency */}
-        <div className="rounded-xl border-l-4 border-cod-green glass-card p-4">
+        <div className="rounded-sm border-l-4 border-cod-green glass-card p-4">
           <div className="mb-2 text-[10px] text-cod-gray">EMERGENCY</div>
           <div className="text-[12px]">
             <a

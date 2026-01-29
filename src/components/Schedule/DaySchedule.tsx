@@ -2,10 +2,10 @@ import { ScheduleDay } from "@/lib/types";
 
 export default function DaySchedule({ day }: { day: ScheduleDay }) {
   return (
-    <div className="mb-2 overflow-hidden rounded-xl glass-card">
+    <div className="mb-2 overflow-hidden rounded-sm glass-card">
       <div className="flex items-center justify-between bg-white/5 px-3 py-2.5">
         <span className="text-[14px] font-bold">{day.name}</span>
-        <span className="text-[11px] text-cod-orange">{day.date}</span>
+        <span className="text-[11px] text-cod-lime">{day.date}</span>
       </div>
       <div className="p-3">
         {day.matches.map((match, i) => (
@@ -17,7 +17,7 @@ export default function DaySchedule({ day }: { day: ScheduleDay }) {
                 : ""
             }`}
           >
-            <div className="min-w-[60px] text-[11px] font-semibold text-cod-cyan">
+            <div className="min-w-[60px] text-[11px] font-semibold text-cod-lime">
               {match.time}
             </div>
             <div>

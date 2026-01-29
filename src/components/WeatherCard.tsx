@@ -20,7 +20,7 @@ export default function WeatherCard() {
   }
 
   return (
-    <div className="rounded-xl border-l-4 border-cod-green glass-card p-4 text-center">
+    <div className="rounded-sm border-l-4 border-cod-green glass-card p-4 text-center">
       <div className="flex items-center justify-center gap-1 text-[10px] text-cod-gray">
         {data.source === "live" && (
           <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
@@ -56,7 +56,7 @@ export default function WeatherCard() {
 
 function StaticWeather() {
   return (
-    <div className="rounded-xl border-l-4 border-cod-green glass-card p-4 text-center">
+    <div className="rounded-sm border-l-4 border-cod-green glass-card p-4 text-center">
       <div className="text-[10px] text-cod-gray">WEATHER</div>
       <div className="text-[28px] font-bold text-shadow-subtle">55&deg;F</div>
       <div className="text-[10px] text-cod-gray">Low 35&deg; &bull; 17% rain</div>

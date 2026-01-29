@@ -8,16 +8,16 @@ export default function HotelCard() {
 
   return (
     <section id="hotel" className="my-5">
-      <h2 className="mb-1 font-heading text-[16px] font-bold uppercase tracking-[6px] text-cod-orange">
+      <h2 className="cdl-section-header">
         {"\ud83c\udfe8"} Hotel
       </h2>
       <div className="section-divider" />
 
       {/* Recommended */}
-      <div className="mb-2.5 rounded-xl border border-cod-lime/50 glass-card card-lift p-4">
+      <div className="mb-2.5 rounded-sm border border-cod-lime/50 glass-card card-lift p-4">
         <div className="mb-2 flex items-center justify-between">
           <span className="text-[15px] font-bold">La Quinta Dallas Uptown</span>
-          <span className="rounded bg-cod-lime px-2 py-0.5 text-[9px] font-bold uppercase text-cod-black">
+          <span className="rounded-sm bg-cod-lime px-2 py-0.5 text-[9px] font-bold uppercase text-cod-black">
             Best Value
           </span>
         </div>
@@ -36,7 +36,7 @@ export default function HotelCard() {
           href={LINKS.hotelMap}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2.5 flex items-center gap-2.5 rounded-lg glass-card px-3 py-2.5 text-white no-underline card-lift active:border-cod-green/50 active:bg-cod-green/20"
+          className="mt-2.5 flex items-center gap-2.5 rounded-sm glass-card px-3 py-2.5 text-white no-underline card-lift active:border-cod-green/50 active:bg-cod-green/20"
         >
           <span className="w-7 text-center text-[18px]">{"\ud83d\udccd"}</span>
           <div className="flex-1">
@@ -48,7 +48,7 @@ export default function HotelCard() {
       </div>
 
       {/* Other Options */}
-      <div className="rounded-xl border-l-4 border-cod-green glass-card p-4">
+      <div className="rounded-sm border-l-4 border-cod-green glass-card p-4">
         <button
           onClick={() => setOtherOpen(!otherOpen)}
           className="flex w-full cursor-pointer items-center justify-between border-none bg-transparent text-white"

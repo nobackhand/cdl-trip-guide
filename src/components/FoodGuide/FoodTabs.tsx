@@ -13,7 +13,7 @@ export default function FoodTabs() {
 
   return (
     <section id="food" className="my-5">
-      <h2 className="mb-1 font-heading text-[16px] font-bold uppercase tracking-[6px] text-cod-orange">
+      <h2 className="cdl-section-header">
         {"\ud83c\udf7d\ufe0f"} Food & Drink
       </h2>
       <div className="section-divider" />
@@ -26,9 +26,9 @@ export default function FoodTabs() {
             key={loc.id}
             onClick={() => setActiveTab(loc.id)}
             whileTap={{ scale: 0.95 }}
-            className={`cursor-pointer whitespace-nowrap rounded-lg border-none px-3 py-2 font-body text-[11px] font-semibold ${
+            className={`cursor-pointer whitespace-nowrap rounded-sm border-none px-3 py-2 font-heading text-[12px] tracking-[0.05em] ${
               activeTab === loc.id
-                ? "bg-cod-green text-white"
+                ? "bg-cod-lime text-cod-black"
                 : "bg-cod-dark2 text-cod-gray"
             }`}
           >

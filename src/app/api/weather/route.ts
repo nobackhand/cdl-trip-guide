@@ -2,10 +2,25 @@ import { NextResponse } from "next/server";
 
 const DALLAS_COORDS = { lat: 32.8412, lon: -96.7837 };
 
+// Demo fallback data when API key is not configured
+const DEMO_DATA = {
+  temp: 55,
+  feelsLike: 52,
+  description: "Clouds",
+  icon: "04d",
+  high: 55,
+  low: 35,
+  rainChance: 17,
+  hourly: [],
+  source: "demo" as const,
+};
+
 export async function GET() {
   const API_KEY = process.env.OPENWEATHER_API_KEY;
+
+  // Return demo data if no API key (works without configuration)
   if (!API_KEY) {
-    return NextResponse.json({ error: "No API key configured" }, { status: 500 });
+    return NextResponse.json(DEMO_DATA);
   }
 
   try {

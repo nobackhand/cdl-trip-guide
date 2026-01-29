@@ -23,7 +23,7 @@ export default function LocationTab({ location }: { location: FoodLocation }) {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="mb-4 rounded-xl bg-gradient-to-br from-cod-orange to-[#cc5500] p-3"
+          className="mb-4 rounded-sm bg-gradient-to-br from-cod-green to-cod-green-dark p-3"
         >
           <div className="text-[13px] font-bold">
             {"\ud83d\udd25"} {location.proTip.title}
@@ -34,7 +34,7 @@ export default function LocationTab({ location }: { location: FoodLocation }) {
 
       {location.categories.map((category) => (
         <div key={category.title} className="mb-4">
-          <div className="mb-2 text-[13px] font-bold text-cod-cyan">
+          <div className="mb-2 text-[13px] font-bold text-cod-lime">
             {category.icon} {category.title}
           </div>
           <motion.div variants={container} initial="hidden" animate="show">
@@ -47,7 +47,7 @@ export default function LocationTab({ location }: { location: FoodLocation }) {
                 rel="noopener noreferrer"
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className="my-1.5 flex items-center gap-2.5 rounded-lg glass-card px-3 py-2.5 text-white no-underline card-lift active:border-cod-green/50 active:bg-cod-green/20"
+                className="my-1.5 flex items-center gap-2.5 rounded-sm glass-card px-3 py-2.5 text-white no-underline card-lift active:border-cod-green/50 active:bg-cod-green/20"
               >
                 <span className="w-7 text-center text-[18px]">{spot.icon}</span>
                 <div className="flex-1">
