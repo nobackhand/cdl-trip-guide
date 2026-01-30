@@ -25,7 +25,7 @@ export default function ScheduleTabs() {
 
       {/* Stream Banner */}
       <motion.a
-        href="https://www.youtube.com/CDL"
+        href="https://www.youtube.com/@CODLeague"
         target="_blank"
         rel="noopener noreferrer"
         whileTap={{ scale: 0.98 }}

@@ -5,7 +5,8 @@ export const EVENT_END = new Date("2026-02-01T23:00:00-06:00");
 // Quick action links
 export const LINKS = {
   hotel: "https://www.wyndhamhotels.com/laquinta",
-  stream: "https://www.youtube.com/CDL",
+  stream: "https://www.youtube.com/@CODLeague",
+  twitch: "https://www.twitch.tv/callofduty",
   venue: "https://maps.google.com/?q=Moody+Coliseum+SMU+Dallas",
   hotelMap:
     "https://maps.google.com/?q=La+Quinta+Inn+Suites+Dallas+Uptown+4440+N+Central+Expressway",
