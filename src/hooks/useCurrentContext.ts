@@ -82,7 +82,7 @@ function getContext(now: Date): CurrentContext {
       type: "match-live",
       title: `\ud83d\udd34 LIVE: ${currentMatch.title}`,
       subtitle: currentMatch.note,
-      action: { label: "Watch", href: "https://www.youtube.com/CDL" },
+      action: { label: "Watch", href: "https://www.youtube.com/@CODLeague" },
       color: "red",
     };
   }
