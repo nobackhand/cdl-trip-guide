@@ -1,15 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { scheduleDays } from "@/data/schedule";
 import DaySchedule from "./DaySchedule";
 import BracketView from "./BracketView";
+import { EVENT_START, EVENT_END } from "@/lib/constants";
 
 type TabId = string | "bracket";
 
+// Get the appropriate default tab based on current date (Central Time)
+function getDefaultTab(): TabId {
+  // Get current time in Central Time
+  const now = new Date();
+  const centralTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+
+  // Map schedule day IDs to their actual dates (2026 event dates)
+  const dayDates: Record<string, Date> = {
+    thu: new Date(2026, 0, 29), // Jan 29
+    fri: new Date(2026, 0, 30), // Jan 30
+    sat: new Date(2026, 0, 31), // Jan 31
+    sun: new Date(2026, 1, 1),  // Feb 1
+  };
+
+  // If before event, show the first day
+  if (centralTime < EVENT_START) {
+    return "thu";
+  }
+
+  // If after event, show bracket
+  if (centralTime > EVENT_END) {
+    return "bracket";
+  }
+
+  // During event: find today's schedule day
+  const today = new Date(centralTime.getFullYear(), centralTime.getMonth(), centralTime.getDate());
+
+  for (const [dayId, dayDate] of Object.entries(dayDates)) {
+    if (today.getTime() === dayDate.getTime()) {
+      return dayId;
+    }
+  }
+
+  // Fallback to first day
+  return "thu";
+}
+
 export default function ScheduleTabs() {
-  const [activeTab, setActiveTab] = useState<TabId>("thu");
+  const defaultTab = useMemo(() => getDefaultTab(), []);
+  const [activeTab, setActiveTab] = useState<TabId>(defaultTab);
 
   const tabs = [
     ...scheduleDays.map((d) => ({ id: d.id, label: d.tabLabel })),
